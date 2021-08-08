@@ -295,7 +295,8 @@ class big2Game:
         self.neuralNetworkInputs[nnnPlayer][phInd+27:] = 0                
     
     def updateGame(self, option, nCards=0):
-        print(option, nCards)
+        #print(option, nCards)
+        if self.gameOver: return
         self.goCounter += 1
         if option == -1:
             #they pass
@@ -476,7 +477,7 @@ class big2Game:
             oneCardOptions = enumerateOptions.oneCardOptions(currHand)
             twoCardOptions = enumerateOptions.twoCardOptions(handOptions)
             threeCardOptions = enumerateOptions.threeCardOptions(handOptions)
-            fourCardOptions = enumerateOptions.fourCardOptions(handOptions)
+            #fourCardOptions = enumerateOptions.fourCardOptions(handOptions)
             fiveCardOptions = enumerateOptions.fiveCardOptions(handOptions)
             
             for option in oneCardOptions:
@@ -493,10 +494,10 @@ class big2Game:
                     index = enumerateOptions.getIndex(option, 3)
                     availableActions[index] = 1
                     
-            if not isinstance(fourCardOptions, int):
-                for option in fourCardOptions:
-                    index = enumerateOptions.getIndex(option, 4)
-                    availableActions[index] = 1
+            #if not isinstance(fourCardOptions, int):
+            #    for option in fourCardOptions:
+            #        index = enumerateOptions.getIndex(option, 4)
+            #        availableActions[index] = 1
                     
             if not isinstance(fiveCardOptions, int):
                 for option in fiveCardOptions:
