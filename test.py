@@ -121,14 +121,14 @@ def data(id):
             #'ready': [readyList[i] for i in RANGE4],
         })
     hands = [game.currentHands[i].tolist() for i in RANGE4]
-    hands = [e if i == id else [-1]*len(e) for i,e in zip(RANGE4,hands)]
+    hands = [e if (i == id or game.gameOver) else [-1]*len(e) for i,e in zip(RANGE4,hands)]
     options = actionsToOptions(game.returnAvailableActions()) if game.playersGo == id else []
     return json.dumps({
         'state': 'over' if game.gameOver else 'game',
         'player': game.playersGo,
         'top': game.handsPlayed[game.goIndex-1].hand.tolist(),
         'options': options,
-        'hands': hands,
+        'hands': [[]] + hands,
     })
 
 @app.route("/play/<id>/<option>")
